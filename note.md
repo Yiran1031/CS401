@@ -30,9 +30,9 @@ markdown 使用*星号*和_底线_作为标记强调字词的符号
 如果要标记一小段行内代码，可以用反引号把它包括起来（ ''）
 Use the `printf()` function.
 
-'''
+```
 public static void main(String[] args)
 {
   System.out.print("helloword");
 }
-'''
+```
