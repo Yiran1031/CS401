@@ -62,7 +62,7 @@ public class SortedLinkedList<T> extends LinkedList<T> {
 	{
 		SortedLinkedList<Employee> sortList = new SortedLinkedList();
 		try {
-			Scanner s = new Scanner(new File("C:\\Users\\41567\\Desktop\\code\\lab9\\src\\lab9\\emp.txt"));	
+			Scanner s = new Scanner(new File("\emp.txt"));	
 			String str[] = new String[2];
 			while(s.hasNext())
 			{
