@@ -62,7 +62,7 @@ public class SortedLinkedList<T> extends LinkedList<T> {
 	{
 		SortedLinkedList<Employee> sortList = new SortedLinkedList();
 		try {
-			Scanner s = new Scanner(new File("\emp.txt"));	
+			Scanner s = new Scanner(new File("C:\\Users\\41567\\Desktop\\code\\lab9\\src\\lab9\\emp.txt"));	
 			String str[] = new String[2];
 			while(s.hasNext())
 			{
@@ -117,12 +117,19 @@ public class SortedLinkedList<T> extends LinkedList<T> {
 		l = (LLNode<Employee>)list;
 		while(l != null) 
 		{
-			if(l.getLink() != (LLNode<Employee>)list) {
+			/*if(l.getLink() != (LLNode<Employee>)list) {
 			System.out.println("" + l.getInfo().getId() + " " + l.getInfo().getName());
 			l = l.getLink();}
 			else 
 			{
 				System.out.println("" + l.getInfo().getId() + " " + l.getInfo().getName());
+				l = null;
+			}*/
+			System.out.println("" + l.getLink().getInfo().getId() + " " + l.getLink().getInfo().getName());
+			l = l.getLink();
+			if(l.getLink() == (LLNode<Employee>)list) 
+			{
+				System.out.println("" + l.getLink().getInfo().getId() + " " + l.getLink().getInfo().getName());
 				l = null;
 			}
 		} 
