@@ -4,6 +4,7 @@ import java.util.Iterator;
 public class BinarySearchTree<T> implements BSTInterface<T> {
 	protected BSTNode<T> root;
 	protected Comparator<T> comp; //used for all comparisons
+	protected boolean found;
 	
 	public BinarySearchTree() //use natural order
 	{
@@ -25,7 +26,8 @@ public class BinarySearchTree<T> implements BSTInterface<T> {
 	@Override
 	public boolean add(T element) {
 		// TODO Auto-generated method stub
-		return false;
+		root = recAdd(element, root);
+		return true;
 	}
 	
 	private BSTNode<T> recAdd(T element, BSTNode<T> node)
@@ -83,9 +85,48 @@ public class BinarySearchTree<T> implements BSTInterface<T> {
 	@Override
 	public boolean remove(T target) {
 		// TODO Auto-generated method stub
-		return false;
+		recRemove(target, root);
+		return found;
 	}
-
+	private BSTNode<T> recRemove(T target, BSTNode<T> node)
+	{
+		if(node == null)
+			found = false;
+		else if (comp.compare(target, node.getInfo()) < 0)
+			node.setLeft(recRemove(target,node.getLeft()));
+		else if(comp.compare(target, node.getInfo()) > 0)
+			node.setRight(recRemove(target,node.getRight()));
+		else //if the target is found.
+		{
+			node = removeNode(node);
+			found = true;
+		}
+		return node;
+	}
+	
+	private BSTNode<T> removeNode(BSTNode<T> node)
+	{
+		T data;
+		if(node.getLeft() == null) // if the tree do not has left subtree, just remove it and return right subtree
+			return node.getRight();
+		else if(node.getRight() == null)
+			return node.getLeft();
+		else 
+		{// if the target has subtree
+			data = getPredecessor(node.getLeft());// lefttree's right node
+			node.setInfo(data);
+			node.setLeft(recRemove(data, node.getLeft()));// then remove it 
+			return node;
+		}
+	}
+	
+	private T getPredecessor(BSTNode<T> subtree) 
+	{
+		BSTNode<T> temp = subtree;
+		while(temp.getRight() != null)
+			temp = temp.getRight();
+		return temp.getInfo();
+	}
 
 	@Override
 	public boolean isFull() {
@@ -105,7 +146,9 @@ public class BinarySearchTree<T> implements BSTInterface<T> {
 	@Override
 	public int size() {
 		// TODO Auto-generated method stub
-		return 0;
+		System.out.println("The size of the tree is :" + iteSize(root) + " (using the iterative method ");
+		System.out.println("the size of the tree is :" + recSize(root) + " (using the recursive method)");
+		return iteSize(root);
 	}
 	
 	//use recursive approach
@@ -261,4 +304,17 @@ public class BinarySearchTree<T> implements BSTInterface<T> {
 			q.enqueue(node.getInfo());
 		}
 	}
+	
+	public int getMaxDepth(BSTNode<T> root) 
+	{
+		if(root == null)
+			return 0;
+		else 
+		{
+			int left =getMaxDepth(root.getLeft());
+			int right = getMaxDepth(root.getRight());
+			return 1 + Math.max(left, right);
+		}
+	}
+	
 	}
