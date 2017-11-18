@@ -3,10 +3,10 @@ public class Coupon {
 	private String Provider;
 	private String product;
 	private int price;
-	private double discount;
+	private int discount;
 	private int expiration;
 	private boolean status;
-	public Coupon(String provider, String product, int price, double discount, int expiration) 
+	public Coupon(String provider, String product, int price, int discount, int expiration) 
 	{
 		this.Provider =  provider;
 		this.product = product;
@@ -45,18 +45,29 @@ public class Coupon {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public double getDiscount() {
+	public int getDiscount() {
 		return discount;
 	}
-	public void setDiscount(double discount) {
-		this.discount = discount;
+	public void setDiscount(int discount) {
+		if(discount <= 0.8 && discount >=0.05) 
+		{
+			this.discount = discount;
+		}else
+			System.out.println("failure, please input valid value");
 	}
+			
+		
 	public int getExpiration() {
 		return expiration;
 	}
 	public void setExpiration(int expiration) {
-		this.expiration = expiration;
+		if(expiration<= 365 && expiration >=0)
+		{
+			this.expiration = expiration;
+		}else
+			System.out.println("failure, please input valid value");	
 	}
+	
 	public boolean isStatus() {
 		return status;
 	}
@@ -64,4 +75,22 @@ public class Coupon {
 		this.status = status;
 	}
 	
+	public String toString() 
+	{
+		return this.getProvider()+","+this.getProduct() + "," +this.getPrice() + "," + this.getDiscount()+","+this.getExpiration()+","+this.isStatus();
+	} 
+	
+	public int compareTo(Coupon c, String type) 
+	{
+		if(type.equals("Product"))
+		{
+			if(this.getProduct().compareTo(c.getProduct()) < 0)
+				return -1;
+			else if(this.getProduct().compareTo(c.getProduct()) == 0)
+				return 0;
+			else if(this.getProduct().compareTo(c.getProduct()) > 0)
+				return 1;
+		}
+		return 1;
+	}
 }

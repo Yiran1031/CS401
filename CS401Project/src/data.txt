@@ -1,0 +1,12 @@
+g,aaa,10,50,100
+a,bbb,12,50,100
+c,ddd,13,50,100
+b,eee,15,50,100
+d,ggg,16,50,100
+e,qqq,100,55,100,false
+f,sss,100,55,100,false
+f,fff,12,32,22,false
+y,ddd,12,32,22,false
+a,aaa,12,32,22,false
+s,ccc,123,12,11,false
+s,sss,11,23,32,false
